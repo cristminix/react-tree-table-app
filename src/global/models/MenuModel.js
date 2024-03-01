@@ -15,15 +15,6 @@ class MenuModel extends JsStoreDB {
     level: { notNull: false, dataType: "number", default: 0 },
     parent: { notNull: false, dataType: "number", default: -1 },
     hidden: { notNull: false, dataType: "boolean", default: false },
-    dev: { notNull: false, dataType: "boolean", default: false },
-
-    useModel: { notNull: false, dataType: "boolean", default: false },
-    model: { notNull: false, dataType: "string", default: "" },
-    modelListMethod: { notNull: false, dataType: "string", default: "" },
-    slugField: { notNull: false, dataType: "string", default: "" },
-    displayField: { notNull: false, dataType: "string", default: "" },
-    childRoutePath: { notNull: false, dataType: "string", default: "" },
-    childIconCls: { notNull: false, dataType: "string", default: "" },
   }
   constructor() {
     super()
