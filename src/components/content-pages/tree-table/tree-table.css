@@ -1,0 +1,39 @@
+@tailwind base; 
+@tailwind components; 
+@tailwind utilities;
+
+.cp_tree-table {
+    @apply text-sm;
+}
+.cp_tree-table_row{
+    @apply py-2 h-auto
+}
+.cp_tree-table_viewport{
+    @apply h-screen [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-slate-700 dark:[&::-webkit-scrollbar-thumb]:bg-slate-500;
+}
+
+.cp_tree-table .cp_tree-table_header {
+border-bottom: 1px solid rgba(55, 53, 47, 0.09); 
+    @apply px-2 text-left text-xs font-medium text-gray-500 uppercase;
+}
+
+.cp_tree-table .cp_tree-table_cell,
+.cp_tree-table .cp_tree-table_header-cell {
+    @apply flex items-center px-2;
+} 
+
+.cp_tree-table .cp_tree-table_cell .toggle-button {
+    @apply relative inline-block h-[14px] align-middle pb-[5px] m-0 cursor-pointer outline-none;
+}
+
+.cp_tree-table .cp_tree-table_cell .toggle-button+span {
+    @apply align-middle;
+}
+
+.cp_tree-table .cp_tree-table_cell>.without-children>span {
+    @apply pl-[15px];
+}
+
+.cp_tree-table .cp_tree-table_cell>.with-children>span {
+    @apply font-bold
+}
