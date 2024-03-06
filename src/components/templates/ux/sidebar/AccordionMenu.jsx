@@ -1,9 +1,15 @@
 import { cls13, cls14 } from "@/components/templates/ux/cls"
 import AccordionMenuItem from "./AccordionMenuItem"
 import menuData from "./menu.json"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { HSAccordion } from "preline"
 const AccordionMenu = ({}) => {
   const [data, setData] = useState(menuData)
+  useEffect(() => {
+    setTimeout(()=>{
+      HSAccordion.autoInit()
+    },1000)
+  })
   return (
     <nav data-hs-accordion-always-open="" className={cls13}>
       <ul className={cls14}>

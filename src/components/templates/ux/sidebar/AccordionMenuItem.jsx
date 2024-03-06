@@ -71,7 +71,7 @@ const AccordionMenuItem = ({ children, name, index, hasChild, title, path, icon 
       ) : (
         <>
           <li key={name}>
-            <a href={`#${path}`} className={cls24}>
+            <a href={`#${path}`} className={`${cls18} ${cls24}`}>
               <i className={icon}></i>
               {title}
             </a>{" "}

@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 .cp_tree-table {
-    @apply text-sm;
+    @apply text-sm dark:text-slate-200;
 }
 .cp_tree-table_row{
     @apply py-2 h-auto
 }
 .cp_tree-table_viewport{
-    @apply h-screen [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-slate-700 dark:[&::-webkit-scrollbar-thumb]:bg-slate-500;
+    @apply dark:bg-slate-800 h-screen [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-slate-700 dark:[&::-webkit-scrollbar-thumb]:bg-slate-500;
 }
 
 .cp_tree-table .cp_tree-table_header {
