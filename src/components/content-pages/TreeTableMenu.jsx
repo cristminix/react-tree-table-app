@@ -1,8 +1,12 @@
 import { TreeTable, TreeState } from "cp-react-tree-table"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { cls28 } from "@/components/templates/ux/cls"
 import "./tree-table/tree-table.css"
 import menus from "@/components/templates/ux/sidebar/menu.json"
+
+import MenuModel from "@/global/models/MenuModel"
+const mMenu = MenuModel.getInstance()
+
 const btnCls =
   "py-2 px-2 inline-flex items-center gap-x-2 -mt-px -ms-px first:rounded-t-md last:rounded-b-md sm:first:rounded-s-md sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-md text-xs font-medium focus:z-10 border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
 
@@ -33,6 +37,22 @@ const createTreeData = (menuData) => {
 const TreeTableMenu = () => {
   const treeData = createTreeData(menus)
   const [treeValue, setTreeValue] = useState(TreeState.create(treeData))
+
+  const insertMenuFromJson = async () => {
+    console.log(`Insert or update menu from JSON file`)
+    console.log(menus)
+    await mMenu.import(menus)
+  }
+
+  useEffect(()=>{
+    if(!mMenu.hasReadyCallbacks()){
+      mMenu.onReady(()=>{
+        if(mMenu.connected){
+          insertMenuFromJson()
+        }
+      })
+    }
+  },[])
 
   const deleteMenu = (row) => {
     if (confirm(`Are you sure to delete this menu "${row.data.title}"?`)) {
@@ -114,6 +134,7 @@ const TreeTableMenu = () => {
 
   return (
     <div className={cls28}>
+      <span></span>
       <div className="border rounded-xl shadow-sm   dark:bg-slate-800 dark:border-gray-700 bg-white dark:bg-slate-900 ">
         <div class="flex gap-2 justify-between items-center px-4 py-4 mb-2">
           <div className="flex gap-2">

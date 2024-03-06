@@ -12,6 +12,9 @@ class JsStoreDB {
   async connect() {
     this.connection = new Connection()
     this.connection.addPlugin(workerInjector)
+    // if(this.connection){
+    //   this.connected = true
+    // }
   }
   calculateOffset(pageNumber, limit) {
     const offset = (pageNumber - 1) * limit

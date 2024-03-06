@@ -3,6 +3,9 @@ import AccordionMenuItem from "./AccordionMenuItem"
 import menuData from "./menu.json"
 import { useEffect, useState } from "react"
 import { HSAccordion } from "preline"
+import MenuModel from "@/global/models/MenuModel"
+const mMenu = MenuModel.getInstance()
+
 const AccordionMenu = ({}) => {
   const [data, setData] = useState(menuData)
   useEffect(() => {

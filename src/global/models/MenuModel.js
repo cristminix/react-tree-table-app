@@ -101,6 +101,11 @@ class MenuModel extends JsStoreDB {
     }
     return 0
   }
+  hasReadyCallbacks = () => this.onReadyCallbacks.length > 0
+  onReadyCallbacks = []
+  onReady(callback) {
+    this.onReadyCallbacks.push(callback)
+  }
   async initTable() {
     const db = {
       name: this.dbName,
@@ -112,12 +117,14 @@ class MenuModel extends JsStoreDB {
       ],
     }
     const isDbCreated = await this.connection.initDb(db)
+    this.connected = true
+
     if (isDbCreated) {
-      this.connected = true
       console.log("Db Created & connection is opened")
     } else {
       console.log("Connection is opened")
     }
+    this.onReadyCallbacks.forEach(callback => callback(this))
   }
   async fixOrder(parent = -1) {
     const records = await this.connection.select({
@@ -221,18 +228,18 @@ class MenuModel extends JsStoreDB {
     const lists = await this.getList(-1, maxRow)
     const menus = !createTreeData ? lists.records : MenuModel.arrayToTreeData(lists.records)
     for (const menu of menus) {
-      const subLists = await this.getList(!createTreeData ? MenuModel.id : MenuModel.data.id, maxRow)
+      const subLists = await this.getList(!createTreeData ? menu.id : menu.data.id, maxRow)
       const childMenus = !createTreeData ? subLists.records : MenuModel.arrayToTreeData(subLists.records)
-      MenuModel.children = childMenus
+      menu.children = childMenus
     }
     return menus
   }
   async import(menus) {
     for (const menu of menus) {
-      delete MenuModel.id
+      delete menu.id
       console.log(menu)
       const record = await this.insertOrUpdate(menu, "slug")
-      for (const child of MenuModel.children) {
+      for (const child of menu.children) {
         delete child.id
         child.parent = record.id
         const childRecord = await this.insertOrUpdate(child, "slug")
